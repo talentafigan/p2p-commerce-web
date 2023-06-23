@@ -10,6 +10,24 @@ const routes: Array<RouteConfig> = [
     path: "/",
     component: Module.index,
   },
+  {
+    path: "/auth/client/login",
+    name: "/authClientLogin",
+    component: Module.authClientLogin,
+
+  },
+  {
+    path: "/auth/client/register",
+    name: "/authClientRegister",
+    component: Module.authClientRegister,
+
+  },
+  {
+    path: "/auth/client/forgot-password",
+    name: "/authClientForgotPasword",
+    component: Module.authClientForgotPasword,
+
+  },
 ];
 
 const router = new VueRouter({
