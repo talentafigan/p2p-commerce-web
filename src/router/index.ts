@@ -28,6 +28,24 @@ const routes: Array<RouteConfig> = [
     component: Module.authClientForgotPasword,
 
   },
+  {
+    path: "/auth/seller/login",
+    name: "/authSellerLogin",
+    component: Module.authSellerLogin,
+
+  },
+  {
+    path: "/auth/seller/register",
+    name: "/authSellerRegister",
+    component: Module.authSellerRegister,
+
+  },
+  {
+    path: "/auth/seller/forgot-password",
+    name: "/authSellerForgotPasword",
+    component: Module.authSellerForgotPasword,
+
+  },
 ];
 
 const router = new VueRouter({

@@ -41,12 +41,12 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
 @Component
-export default class authClientLogin extends Vue {
+export default class authSellerLogin extends Vue {
   routeToPageForgotPassword() {
-    this.$router.push("/auth/client/forgot-password");
+    this.$router.push("/auth/seller/forgot-password");
   }
   routeToPageRegister() {
-    this.$router.push("/auth/client/register");
+    this.$router.push("/auth/seller/register");
   }
 }
 </script>
