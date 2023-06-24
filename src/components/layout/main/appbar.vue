@@ -63,13 +63,13 @@ import { Component } from "vue-property-decorator";
 @Component
 export default class LayoutMainAppbar extends Vue {
   routeTopageLoginSeller() {
-    this.$router.push("/auth/seller/login");
+    this.$router.push("/auth/login");
   }
   routeTopageLoginClient() {
-    this.$router.push("/auth/client/login");
+    this.$router.push("/auth/login");
   }
   routeTopageRegisterClient() {
-    this.$router.push("/auth/client/register");
+    this.$router.push("/auth/register");
   }
 }
 </script>

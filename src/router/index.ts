@@ -11,41 +11,47 @@ const routes: Array<RouteConfig> = [
     component: Module.index,
   },
   {
-    path: "/auth/client/login",
+    path: "/auth/login",
     name: "/authClientLogin",
     component: Module.authClientLogin,
 
   },
   {
-    path: "/auth/client/register",
+    path: "/auth/register",
     name: "/authClientRegister",
     component: Module.authClientRegister,
 
   },
   {
-    path: "/auth/client/forgot-password",
+    path: "/auth/forgot-password",
     name: "/authClientForgotPasword",
     component: Module.authClientForgotPasword,
 
   },
-  {
-    path: "/auth/seller/login",
-    name: "/authSellerLogin",
-    component: Module.authSellerLogin,
+  // {
+  //   path: "/auth/portal-seller",
+  //   name: "/portalSeller",
+  //   component: Module.portalSeller,
 
-  },
-  {
-    path: "/auth/seller/register",
-    name: "/authSellerRegister",
-    component: Module.authSellerRegister,
+  // },
+  // {
+  //   path: "/auth/seller/login",
+  //   name: "/authSellerLogin",
+  //   component: Module.authSellerLogin,
 
-  },
-  {
-    path: "/auth/seller/forgot-password",
-    name: "/authSellerForgotPasword",
-    component: Module.authSellerForgotPasword,
+  // },
+  // {
+  //   path: "/auth/seller/register",
+  //   name: "/authSellerRegister",
+  //   component: Module.authSellerRegister,
 
-  },
+  // },
+  // {
+  //   path: "/auth/seller/forgot-password",
+  //   name: "/authSellerForgotPasword",
+  //   component: Module.authSellerForgotPasword,
+
+  // },
 ];
 
 const router = new VueRouter({

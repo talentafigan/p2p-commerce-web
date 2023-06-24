@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "ant-design-vue": "1.7.3",
+    "axios": "^1.4.0",
     "core-js": "^3.8.3",
     "moment": "^2.29.4",
     "remixicon": "^3.4.0",
