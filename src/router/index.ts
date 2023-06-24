@@ -12,20 +12,20 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/auth/login",
-    name: "/authClientLogin",
-    component: Module.authClientLogin,
+    name: "/authLogin",
+    component: Module.authLogin,
 
   },
   {
     path: "/auth/register",
-    name: "/authClientRegister",
-    component: Module.authClientRegister,
+    name: "/authRegister",
+    component: Module.authRegister,
 
   },
   {
     path: "/auth/forgot-password",
-    name: "/authClientForgotPasword",
-    component: Module.authClientForgotPasword,
+    name: "/authForgotPasword",
+    component: Module.authForgotPasword,
 
   },
   // {

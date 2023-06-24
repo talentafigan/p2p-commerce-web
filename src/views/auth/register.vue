@@ -81,7 +81,7 @@ import { Component } from "vue-property-decorator";
 import { AuthApi } from "@/api/auth.api";
 
 @Component
-export default class authClientRegister extends Vue {
+export default class authRegister extends Vue {
   $helpers: any;
   isLoading = false;
 

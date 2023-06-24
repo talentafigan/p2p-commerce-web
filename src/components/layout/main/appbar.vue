@@ -41,14 +41,10 @@
         </div>
       </div>
       <div class="flex justify-end items-center flex-row">
-        <a-button type="primary" @click="routeTopageLoginClient" ghost>
+        <a-button type="primary" @click="routeTopageLogin" ghost>
           Masuk
         </a-button>
-        <a-button
-          class="ml-2"
-          @click="routeTopageRegisterClient"
-          type="primary"
-        >
+        <a-button class="ml-2" @click="routeTopageRegister" type="primary">
           Daftar
         </a-button>
       </div>
@@ -65,10 +61,10 @@ export default class LayoutMainAppbar extends Vue {
   routeTopageLoginSeller() {
     this.$router.push("/auth/login");
   }
-  routeTopageLoginClient() {
+  routeTopageLogin() {
     this.$router.push("/auth/login");
   }
-  routeTopageRegisterClient() {
+  routeTopageRegister() {
     this.$router.push("/auth/register");
   }
 }
