@@ -25,6 +25,14 @@
       </div>
       <div class="w-full flex justify-between mb-3 items-start flex-col">
         <a-input
+          v-decorator="[
+            'userName',
+            {
+              rules: [
+                { required: true, message: 'Please input your username!' },
+              ],
+            },
+          ]"
           placeholder="Username"
           v-model="form.username"
           size="large"
@@ -53,6 +61,7 @@
         v-model="form.phone"
         size="large"
       >
+        <span slot="addonBefore"> +62 </span>
       </a-input>
       <a-alert
         message="Error"
@@ -101,33 +110,27 @@ export default class authRegister extends Vue {
     this.$router.push("/auth/login");
   }
   async onClickRegister() {
-    if (
-      !this.form.email ||
-      !this.form.password ||
-      !this.form.fullname ||
-      !this.form.phone ||
-      !this.form.username
-    )
-      return;
     this.showErrorMessage = false;
     this.isLoading = true;
     try {
-      const response = await this.authApi.register(this.form);
+      const response = await this.authApi.register({
+        ...this.form,
+        phone: "62" + this.form.phone,
+      });
       if (response.data.status !== "SUCCESS") {
         this.showErrorMessage = true;
         this.errorMessage = response.data.message;
         return;
       }
-      console.log(response);
-
-      this.$store.commit("auth/setAuth", {
-        token: response.data.data.accessToken,
-        user: response.data.data.user,
-        login_date: new Date().toISOString(),
-      });
-      this.$nextTick(() => {
-        window.location.reload();
-      });
+      this.$message.success("Berhasil Daftar !");
+      setTimeout(() => {
+        this.$store.commit("auth/setAuth", {
+          token: response.data.data.accessToken,
+          user: response.data.data.user,
+          login_date: new Date().toISOString(),
+        });
+        this.$router.push("/auth/login");
+      }, 1000);
     } catch (error: any) {
       this.showErrorMessage = true;
       this.errorMessage = error.response

@@ -6,7 +6,7 @@
       </div>
 
       <div class="w-full flex justify-between mb-3 items-start flex-col">
-        <a-input placeholder="Email"> </a-input>
+        <a-input placeholder="Email" size="large"> </a-input>
       </div>
       <div class="flex justify-between flex-row items-center w-full mt-6">
         <a-button

@@ -46,6 +46,7 @@
       />
       <div class="flex justify-center items-center w-full mt-5">
         <a-button
+          :disabled="!form.key || !form.password"
           type="primary"
           html-type="submit"
           :loading="isLoading"
@@ -62,6 +63,7 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import { AuthApi } from "@/api/auth.api";
+import { ProfileApi } from "@/api/profile.api";
 
 @Component
 export default class AuthLogin extends Vue {
@@ -77,6 +79,7 @@ export default class AuthLogin extends Vue {
   };
 
   authApi = new AuthApi();
+  profileApi = new ProfileApi();
 
   routeToPageForgotPassword() {
     this.$router.push("/auth/forgot-password");
@@ -95,16 +98,15 @@ export default class AuthLogin extends Vue {
         this.errorMessage = response.data.message;
         return;
       }
-      console.log(response);
-
+      const resp = await this.profileApi.profileMe(
+        response.data.data.accessToken
+      );
       this.$store.commit("auth/setAuth", {
         token: response.data.data.accessToken,
-        user: response.data.data.user,
-        login_date: new Date().toISOString(),
+        user: resp.data.data.user,
       });
-      this.$nextTick(() => {
-        window.location.reload();
-      });
+
+      this.$router.push("/");
     } catch (error: any) {
       this.showErrorMessage = true;
       this.errorMessage = error.response

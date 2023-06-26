@@ -2,7 +2,7 @@ import Axios from "axios";
 
 export class AuthApi {
   logout() {
-    return Axios.post("/auth/logout");
+    return Axios.delete("/auth/logout");
   }
   login(data: { key: string; password: string }) {
     return Axios.post("/api/login", {

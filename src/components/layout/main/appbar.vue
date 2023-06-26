@@ -40,13 +40,29 @@
           </a-dropdown>
         </div>
       </div>
-      <div class="flex justify-end items-center flex-row">
+      <div
+        v-if="!isAuthenticated"
+        class="flex justify-end items-center flex-row"
+      >
         <a-button type="primary" @click="routeTopageLogin" ghost>
           Masuk
         </a-button>
         <a-button class="ml-2" @click="routeTopageRegister" type="primary">
           Daftar
         </a-button>
+      </div>
+
+      <div
+        v-if="isAuthenticated"
+        class="flex justify-end items-center flex-row mr-4"
+      >
+        <a-dropdown>
+          <a-menu slot="overlay">
+            <a-menu-item key="1" @click="onClickLogout"> Log out </a-menu-item>
+            <a-menu-item key="2"> Profile </a-menu-item>
+          </a-menu>
+          <a-avatar :size="40" icon="user" />
+        </a-dropdown>
       </div>
     </div>
   </div>
@@ -55,17 +71,35 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
+import { AuthApi } from "@/api/auth.api";
 
 @Component
 export default class LayoutMainAppbar extends Vue {
+  authApi = new AuthApi();
+
+  get isAuthenticated() {
+    return this.$store.state.auth.token;
+  }
+
   routeTopageLoginSeller() {
-    this.$router.push("/auth/login");
+    window.open(process.env.VUE_APP_WEB_SELLER_URL);
   }
   routeTopageLogin() {
     this.$router.push("/auth/login");
   }
   routeTopageRegister() {
     this.$router.push("/auth/register");
+  }
+  async onClickLogout() {
+    try {
+      await this.authApi.logout();
+    } catch (error) {
+    } finally {
+      this.$store.commit("auth/resetAuth");
+      this.$nextTick(() => {
+        window.location.reload();
+      });
+    }
   }
 }
 </script>
