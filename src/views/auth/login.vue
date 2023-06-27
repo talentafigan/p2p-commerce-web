@@ -60,7 +60,6 @@
         </a-button>
         <a-button
           class="mt-4"
-          size="large"
           type="link"
           block
           @click="$router.push('/')"
