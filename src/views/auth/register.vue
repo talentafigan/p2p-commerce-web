@@ -1,88 +1,93 @@
 <template>
-  <page-auth-container id="container-login">
-    <div class="w-full px-6">
-      <div class="flex justify-start items-center mb-3">
-        <span class="text-lg font-semibold">Buat akunmu</span>
-      </div>
-      <div class="flex justify-start items-center mb-5">
-        <span class="text-sm"
+  <a-row class="w-full">
+    <a-col :span="8" :offset="8">
+      <div class="h-screen flex justify-center flex-col">
+        <span class="text-2xl font-semibold">Daftar</span>
+        <span class="text-sm mt-2"
           >Sudah ada akun?
           <span
-            style="color: rgb(0, 136, 255)"
-            class="cursor-pointer"
-            @click="routeToPageLogin"
+            class="cursor-pointer text-primary"
+            @click="$router.push('/auth/login')"
             >Masuk</span
           ></span
         >
-      </div>
-
-      <div class="w-full flex justify-between mb-3 items-start flex-col">
-        <a-input
-          placeholder="Nama Lengkap"
-          v-model="form.fullname"
-          size="large"
-        ></a-input>
-      </div>
-      <div class="w-full flex justify-between mb-3 items-start flex-col">
-        <a-input
-          v-decorator="[
-            'userName',
-            {
-              rules: [
-                { required: true, message: 'Please input your username!' },
-              ],
-            },
-          ]"
-          placeholder="Username"
-          v-model="form.username"
-          size="large"
-        ></a-input>
-      </div>
-      <div class="w-full flex justify-between mb-3 items-start flex-col">
-        <a-input-password
-          type="password"
-          placeholder="Password"
-          v-model="form.password"
-          size="large"
-        ></a-input-password>
-      </div>
-      <div class="w-full flex justify-between mb-3 items-start flex-col">
-        <a-input
-          type="email"
-          placeholder="Email"
-          v-model="form.email"
-          size="large"
-        ></a-input>
-      </div>
-
-      <a-input
-        style="width: 100%"
-        placeholder="No Telepon"
-        v-model="form.phone"
-        size="large"
-      >
-        <span slot="addonBefore"> +62 </span>
-      </a-input>
-      <a-alert
-        message="Error"
-        v-if="showErrorMessage"
-        :description="errorMessage"
-        type="error"
-        show-icon
-      />
-      <div class="flex justify-center items-center w-full mt-5">
+        <a-row class="mt-[4vh]">
+          <a-col :span="24">
+            <a-input
+              placeholder="Nama lengkap"
+              class="w-full"
+              v-model="form.fullname"
+              size="large"
+            >
+            </a-input>
+          </a-col>
+          <a-col class="mt-3" :span="24">
+            <a-input
+              placeholder="Username"
+              class="w-full"
+              v-model="form.username"
+              size="large"
+            >
+            </a-input>
+          </a-col>
+          <a-col class="mt-3" :span="24">
+            <a-input
+              placeholder="Email"
+              class="w-full"
+              v-model="form.email"
+              size="large"
+            >
+            </a-input>
+          </a-col>
+          <a-col class="mt-3" :span="24">
+            <a-input
+              placeholder="Nomor telepon"
+              class="w-full"
+              v-model="form.phone"
+              size="large"
+            >
+              <template #addonBefore>
+                <span>+62</span>
+              </template>
+            </a-input>
+          </a-col>
+          <a-col class="mt-3" :span="24">
+            <a-input-password
+              class="w-full"
+              type="password"
+              placeholder="Password"
+              v-model="form.password"
+              size="large"
+            >
+            </a-input-password>
+          </a-col>
+        </a-row>
+        <span class="mt-[4vh]"
+          >Dengan mendaftar anda menyetujui
+          <span class="text-primary">Syarat & Ketentuan</span></span
+        >
+        <a-alert
+          class="mt-4"
+          message="Error"
+          v-if="showErrorMessage"
+          :description="errorMessage"
+          type="error"
+          show-icon
+        />
         <a-button
+          :disabled="isLoading"
+          class="mt-4"
+          size="large"
           type="primary"
-          html-type="submit"
-          block
           :loading="isLoading"
+          block
           @click="onClickRegister"
         >
           Daftar
         </a-button>
       </div>
-    </div>
-  </page-auth-container>
+    </a-col>
+  </a-row>
 </template>
 <script lang="ts">
 import Vue from "vue";
@@ -123,14 +128,12 @@ export default class authRegister extends Vue {
         return;
       }
       this.$message.success("Berhasil Daftar !");
-      setTimeout(() => {
-        this.$store.commit("auth/setAuth", {
-          token: response.data.data.accessToken,
-          user: response.data.data.user,
-          login_date: new Date().toISOString(),
-        });
-        this.$router.push("/auth/login");
-      }, 1000);
+      await this.$helpers.shortSetTimeOut(1000);
+      this.$store.commit("auth/setAuth", {
+        token: response.data.data.accessToken,
+        user: response.data.data.user,
+      });
+      this.$router.push("/auth/login");
     } catch (error: any) {
       this.showErrorMessage = true;
       this.errorMessage = error.response

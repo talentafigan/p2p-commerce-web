@@ -1,12 +1,13 @@
 import Axios from "axios";
 
 export class ProfileApi {
-    profileMe(accessToken? : any) {
-        return Axios.get("/api/profile/me", {
-            headers:{
-                "x-Token-id":accessToken
-            }
-        });
-      }
-    
+  me(accessToken?: string) {
+    return Axios.get("/api/profile/me", {
+      headers: accessToken
+        ? {
+            "x-token-id": accessToken,
+          }
+        : {},
+    });
+  }
 }

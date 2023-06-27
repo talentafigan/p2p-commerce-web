@@ -1,63 +1,75 @@
 <template>
-  <page-auth-container id="container-login">
-    <div class="w-full px-6">
-      <div class="flex justify-start items-center mb-3">
-        <span class="text-lg font-semibold">Masuk</span>
-      </div>
-      <div class="flex justify-start items-center mb-5">
-        <span class="text-sm"
+  <a-row class="w-full">
+    <a-col :span="8" :offset="8">
+      <div class="h-screen flex justify-center flex-col">
+        <span class="text-2xl font-semibold">Masuk</span>
+        <span class="text-sm mt-2"
           >Belum ada akun?
           <span
-            style="color: rgb(0, 136, 255)"
-            class="cursor-pointer"
-            @click="routeToPageRegister"
+            class="cursor-pointer text-primary"
+            @click="$router.push('/auth/register')"
             >Daftar</span
           ></span
         >
-      </div>
-
-      <div class="w-full flex justify-between mb-3 items-start flex-col">
-        <a-input placeholder="Username" v-model="form.key" size="large">
-        </a-input>
-      </div>
-      <div class="w-full flex justify-between mb-3 items-start flex-col">
-        <a-input-password
-          type="password"
-          placeholder="Password"
-          v-model="form.password"
-          size="large"
-        >
-        </a-input-password>
-      </div>
-      <div class="flex justify-end items-center mb-5">
-        <span
-          style="color: rgb(0, 136, 255)"
-          class="cursor-pointer"
-          @click="routeToPageForgotPassword"
-          >Lupa Sandi ?</span
-        >
-      </div>
-      <a-alert
-        message="Error"
-        v-if="showErrorMessage"
-        :description="errorMessage"
-        type="error"
-        show-icon
-      />
-      <div class="flex justify-center items-center w-full mt-5">
+        <a-row class="mt-[5vh]">
+          <a-col :span="24">
+            <a-input
+              placeholder="Username"
+              class="w-full"
+              v-model="form.key"
+              size="large"
+            >
+            </a-input>
+          </a-col>
+          <a-col class="mt-3" :span="24">
+            <a-input-password
+              class="w-full"
+              type="password"
+              placeholder="Password"
+              v-model="form.password"
+              size="large"
+            >
+            </a-input-password>
+          </a-col>
+        </a-row>
+        <div class="flex mt-3 w-full justify-end items-center">
+          <span
+            class="cursor-pointer text-primary"
+            @click="$router.push('/auth/forgot-password')"
+            >Lupa Sandi ?</span
+          >
+        </div>
+        <a-alert
+          class="mt-4"
+          message="Error"
+          v-if="showErrorMessage"
+          :description="errorMessage"
+          type="error"
+          show-icon
+        />
         <a-button
-          :disabled="!form.key || !form.password"
+          :disabled="isLoading"
+          class="mt-4"
+          size="large"
           type="primary"
-          html-type="submit"
           :loading="isLoading"
           block
           @click="onClickLogin"
         >
           Masuk
         </a-button>
+        <a-button
+          class="mt-4"
+          type="link"
+          block
+          @click="$router.push('/')"
+        >
+          <i class="ri-arrow-left-line mr-2"></i>
+          Kembali ke beranda
+        </a-button>
       </div>
-    </div>
-  </page-auth-container>
+    </a-col>
+  </a-row>
 </template>
 <script lang="ts">
 import Vue from "vue";
@@ -80,13 +92,6 @@ export default class AuthLogin extends Vue {
 
   authApi = new AuthApi();
   profileApi = new ProfileApi();
-
-  routeToPageForgotPassword() {
-    this.$router.push("/auth/forgot-password");
-  }
-  routeToPageRegister() {
-    this.$router.push("/auth/register");
-  }
   async onClickLogin() {
     if (!this.form.key || !this.form.password) return;
     this.showErrorMessage = false;
@@ -98,14 +103,14 @@ export default class AuthLogin extends Vue {
         this.errorMessage = response.data.message;
         return;
       }
-      const resp = await this.profileApi.profileMe(
+      const userProfile = await this.profileApi.me(
         response.data.data.accessToken
       );
+      if (userProfile.data.status !== "SUCCESS") return;
       this.$store.commit("auth/setAuth", {
         token: response.data.data.accessToken,
-        user: resp.data.data.user,
+        user: userProfile.data.data.user,
       });
-
       this.$router.push("/");
     } catch (error: any) {
       this.showErrorMessage = true;

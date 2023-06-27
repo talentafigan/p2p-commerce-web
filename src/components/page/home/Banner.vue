@@ -9,7 +9,7 @@
   >
     <vueper-slide v-for="i in 9" :key="i">
       <template #content>
-        <div class="rounded-lg bg-blue-300 h-full">
+        <div class="rounded-lg bg-red-100 h-full">
         </div>
       </template>
     </vueper-slide>
