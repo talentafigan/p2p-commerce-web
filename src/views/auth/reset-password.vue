@@ -106,22 +106,30 @@ export default class AuthLogin extends Vue {
     }
   }
 
+  showInvalidURLDialog() {
+    this.$error({
+      title: "URL tidak valid",
+      content: "Silahkan lakukan permintaan perubahan password lagi.",
+      onOk: () => {
+        this.$router.push("/auth/forgot-password");
+      },
+    });
+    return;
+  }
+
   async validateToken() {
     if (!this.token) {
-      this.$error({
-        title: "URL tidak valid",
-        content: "Silahkan lakukan permintaan perubahan password lagi.",
-        onOk: () => {
-          this.$router.push("/auth/forgot-password");
-        },
-      });
+      this.showInvalidURLDialog();
       return;
     }
     try {
       const response = await this.authApi.resetPasswordCheckCode(this.token);
       if (response.data.code !== "SUCCESS") {
+        this.showInvalidURLDialog();
       }
-    } catch (error) {}
+    } catch (error) {
+      this.showInvalidURLDialog();
+    }
   }
 
   mounted() {
