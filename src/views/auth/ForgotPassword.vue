@@ -2,31 +2,19 @@
   <a-row class="w-full">
     <a-col :span="8" :offset="8">
       <div class="h-screen flex justify-center flex-col">
-        <span class="text-2xl font-semibold">Buat Password Baru</span>
+        <span class="text-2xl font-semibold">Lupa Password</span>
         <span class="text-sm mt-2"
-          >Password baru anda harus berbeda dengan password sebelumnya yang anda
-          gunakan
+          >Jangan Khawatir. Mohon masukan email yang terhubung dengan akun anda.
         </span>
         <a-row class="mt-[3vh]">
-          <a-col class="mt-3" :span="24">
-            <a-input-password
+          <a-col :span="24">
+            <a-input
+              placeholder="Masukan Email Terdaftar"
               class="w-full"
-              type="password"
-              placeholder="Masukan Password Baru"
-              v-model="form.password"
+              v-model="form.email"
               size="large"
             >
-            </a-input-password>
-          </a-col>
-          <a-col class="mt-3" :span="24">
-            <a-input-password
-              class="w-full"
-              type="password"
-              placeholder="Konfirmasi Password Baru"
-              v-model="form.confirmPassword"
-              size="large"
-            >
-            </a-input-password>
+            </a-input>
           </a-col>
         </a-row>
         <a-alert
@@ -46,7 +34,16 @@
           block
           @click="onSubmit"
         >
-          Konfirmasi
+          Submit
+        </a-button>
+        <a-button
+          class="mt-4"
+          type="link"
+          block
+          @click="$router.push('/auth/login')"
+        >
+          <i class="ri-arrow-left-line mr-2"></i>
+          Kembali ke login
         </a-button>
       </div>
     </a-col>
@@ -67,35 +64,27 @@ export default class AuthLogin extends Vue {
   errorMessage = "";
 
   form = {
-    password: "",
-    confirmPassword: "",
+    email: "",
   };
-  token = this.$route.query.token as string;
+
   authApi = new AuthApi();
   profileApi = new ProfileApi();
-
   async onSubmit() {
-    if (!this.form.password) return;
-    if (this.form.password !== this.form.confirmPassword) return;
+    if (!this.form.email) return;
     this.showErrorMessage = false;
     this.isLoading = true;
     try {
-      const response = await this.authApi.resetPasswordNewPassword({
-        code: this.token,
-        newPassword: this.form.password,
-      });
+      const response = await this.authApi.resetPasswordRequest(this.form.email);
       if (response.data.status !== "SUCCESS") {
         this.showErrorMessage = true;
         this.errorMessage = response.data.message;
         return;
       }
       this.$message.success(
-        "Password berhasil diubah, silahkan login kembali!"
+        "Kami Telah Mengirim Tautan Untuk Mereset Password, Silahkan Cek Email Kamu!"
       );
       await this.$helpers.shortSetTimeOut(1000);
-      this.$nextTick(() => {
-        this.$router.push("/auth/login");
-      });
+      this.$router.push("/auth/login");
     } catch (error: any) {
       this.showErrorMessage = true;
       this.errorMessage = error.response
@@ -104,28 +93,6 @@ export default class AuthLogin extends Vue {
     } finally {
       this.isLoading = false;
     }
-  }
-
-  async validateToken() {
-    if (!this.token) {
-      this.$error({
-        title: "URL tidak valid",
-        content: "Silahkan lakukan permintaan perubahan password lagi.",
-        onOk: () => {
-          this.$router.push("/auth/forgot-password");
-        },
-      });
-      return;
-    }
-    try {
-      const response = await this.authApi.resetPasswordCheckCode(this.token);
-      if (response.data.code !== "SUCCESS") {
-      }
-    } catch (error) {}
-  }
-
-  mounted() {
-    this.validateToken();
   }
 }
 </script>
