@@ -14,44 +14,22 @@ const routes: Array<RouteConfig> = [
     path: "/auth/login",
     name: "authLogin",
     component: Module.authLogin,
-
   },
   {
     path: "/auth/register",
     name: "authRegister",
     component: Module.authRegister,
-
   },
   {
     path: "/auth/forgot-password",
-    name: "authForgotPasword",
-    component: Module.authForgotPasword,
-
+    name: "authForgotPassword",
+    component: Module.authForgotPassword,
   },
-  // {
-  //   path: "/auth/portal-seller",
-  //   name: "/portalSeller",
-  //   component: Module.portalSeller,
-
-  // },
-  // {
-  //   path: "/auth/seller/login",
-  //   name: "/authSellerLogin",
-  //   component: Module.authSellerLogin,
-
-  // },
-  // {
-  //   path: "/auth/seller/register",
-  //   name: "/authSellerRegister",
-  //   component: Module.authSellerRegister,
-
-  // },
-  // {
-  //   path: "/auth/seller/forgot-password",
-  //   name: "/authSellerForgotPasword",
-  //   component: Module.authSellerForgotPasword,
-
-  // },
+  {
+    path: "/auth/reset-password",
+    name: "authResetPassword",
+    component: Module.authResetPassword,
+  },
 ];
 
 const router = new VueRouter({
