@@ -9,10 +9,22 @@
         <a-input placeholder="Email"> </a-input>
       </div>
       <div class="flex justify-between flex-row items-center w-full mt-6">
-        <a-button type="primary" html-type="submit" @click="routeToPageLogin">
+        <a-button
+          style="max-width: 48%"
+          html-type="submit"
+          @click="routeToPageLogin"
+          block
+        >
           Kembali
         </a-button>
-        <a-button type="primary" html-type="submit"> Cari </a-button>
+        <a-button
+          style="max-width: 48%"
+          type="primary"
+          html-type="submit"
+          block
+        >
+          Cari
+        </a-button>
       </div>
     </div>
   </page-auth-container>
@@ -22,9 +34,9 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
 @Component
-export default class authClientForgotPasword extends Vue {
+export default class authSellerForgotPasword extends Vue {
   routeToPageLogin() {
-    this.$router.push("/auth/client/login");
+    this.$router.push("/auth/seller/login");
   }
 }
 </script>

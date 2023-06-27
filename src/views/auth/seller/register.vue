@@ -39,7 +39,7 @@
         </a-select>
       </a-input>
       <div class="flex justify-center items-center w-full mt-5">
-        <a-button type="primary" html-type="submit"> Daftar </a-button>
+        <a-button type="primary" html-type="submit" block> Daftar </a-button>
       </div>
     </div>
   </page-auth-container>
@@ -49,9 +49,9 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
 @Component
-export default class authClientRegister extends Vue {
+export default class authSellerRegister extends Vue {
   routeToPageLogin() {
-    this.$router.push("/auth/client/login");
+    this.$router.push("/auth/seller/login");
   }
 }
 </script>

@@ -2,9 +2,15 @@
   <div
     class="w-full z-[1] fixed bg-white border-b flex justify-center items-center flex-col"
   >
-    <div class="w-full px-8 bg-[#f0f3f7] flex justify-end items-center flex-row w-full h-[33px]">
+    <div
+      class="w-full px-8 bg-[#f0f3f7] flex justify-end items-center flex-row w-full h-[33px]"
+    >
       <span class="text-sm text-[#141414] cursor-pointer">Pusar Bantuan</span>
-      <span class="text-sm text-[#141414] ml-4 cursor-pointer">Mulai Berjualan</span>
+      <span
+        class="text-sm text-[#141414] ml-4 cursor-pointer"
+        @click="routeTopageLoginSeller"
+        >Mulai Berjualan</span
+      >
     </div>
     <div class="grid w-full px-8 grid-cols-3 w-full h-[72px]">
       <div class="grid grid-cols-8 col-span-2">
@@ -34,9 +40,29 @@
           </a-dropdown>
         </div>
       </div>
-      <div class="flex justify-end items-center flex-row">
-        <a-button type="primary" ghost> Masuk </a-button>
-        <a-button class="ml-2" type="primary"> Daftar </a-button>
+      <div
+        v-if="!isAuthenticated"
+        class="flex justify-end items-center flex-row"
+      >
+        <a-button type="primary" @click="routeTopageLogin" ghost>
+          Masuk
+        </a-button>
+        <a-button class="ml-2" @click="routeTopageRegister" type="primary">
+          Daftar
+        </a-button>
+      </div>
+
+      <div
+        v-if="isAuthenticated"
+        class="flex justify-end items-center flex-row mr-4"
+      >
+        <a-dropdown>
+          <a-menu slot="overlay">
+            <a-menu-item key="1" @click="onClickLogout"> Log out </a-menu-item>
+            <a-menu-item key="2"> Profile </a-menu-item>
+          </a-menu>
+          <a-avatar :size="40" icon="user" />
+        </a-dropdown>
       </div>
     </div>
   </div>
@@ -45,7 +71,35 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
+import { AuthApi } from "@/api/auth.api";
 
 @Component
-export default class LayoutMainAppbar extends Vue {}
+export default class LayoutMainAppbar extends Vue {
+  authApi = new AuthApi();
+
+  get isAuthenticated() {
+    return this.$store.state.auth.token;
+  }
+
+  routeTopageLoginSeller() {
+    window.open(process.env.VUE_APP_WEB_SELLER_URL);
+  }
+  routeTopageLogin() {
+    this.$router.push("/auth/login");
+  }
+  routeTopageRegister() {
+    this.$router.push("/auth/register");
+  }
+  async onClickLogout() {
+    try {
+      await this.authApi.logout();
+    } catch (error) {
+    } finally {
+      this.$store.commit("auth/resetAuth");
+      this.$nextTick(() => {
+        window.location.reload();
+      });
+    }
+  }
+}
 </script>
