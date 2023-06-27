@@ -3,7 +3,7 @@
     <a-col :span="8" :offset="8">
       <div class="h-screen flex justify-center flex-col">
         <span class="text-2xl font-semibold">Masuk</span>
-        <span class="text-sm mt-1"
+        <span class="text-sm mt-2"
           >Belum ada akun?
           <span
             class="cursor-pointer text-primary"
