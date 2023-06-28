@@ -1,56 +1,66 @@
 <template>
-  <a-row class="w-full">
-    <a-col :span="8" :offset="8">
-      <div class="h-screen flex justify-center flex-col">
-        <span class="text-2xl font-semibold">Buat Password Baru</span>
-        <span class="text-sm mt-2"
-          >Password baru anda harus berbeda dengan password sebelumnya yang anda
-          gunakan
-        </span>
-        <a-row class="mt-[3vh]">
-          <a-col class="mt-3" :span="24">
-            <a-input-password
-              class="w-full"
-              type="password"
-              placeholder="Masukan Password Baru"
-              v-model="form.password"
-              size="large"
-            >
-            </a-input-password>
-          </a-col>
-          <a-col class="mt-3" :span="24">
-            <a-input-password
-              class="w-full"
-              type="password"
-              placeholder="Konfirmasi Password Baru"
-              v-model="form.confirmPassword"
-              size="large"
-            >
-            </a-input-password>
-          </a-col>
-        </a-row>
-        <a-alert
-          class="mt-4"
-          message="Error"
-          v-if="showErrorMessage"
-          :description="errorMessage"
-          type="error"
-          show-icon
-        />
-        <a-button
-          :disabled="isLoading"
-          class="mt-[3vh]"
-          size="large"
-          type="primary"
-          :loading="isLoading"
-          block
-          @click="onSubmit"
-        >
-          Konfirmasi
-        </a-button>
-      </div>
-    </a-col>
-  </a-row>
+  <a-form-model
+    :model="form"
+    :rules="formResetPasswordRules"
+    ref="formResetPassword"
+  >
+    <a-row class="w-full">
+      <a-col :span="8" :offset="8">
+        <div class="h-screen flex justify-center flex-col">
+          <span class="text-2xl font-semibold">Buat Password Baru</span>
+          <span class="text-sm mt-2"
+            >Password baru anda harus berbeda dengan password sebelumnya yang
+            anda gunakan
+          </span>
+          <a-row class="mt-[3vh]">
+            <a-col class="mt-3" :span="24">
+              <a-form-model-item prop="password">
+                <a-input-password
+                  class="w-full"
+                  type="password"
+                  placeholder="Masukan Password Baru"
+                  v-model="form.password"
+                  size="large"
+                >
+                </a-input-password>
+              </a-form-model-item>
+            </a-col>
+            <a-col class="mt-3" :span="24">
+              <a-form-model-item prop="confirmPassword">
+                <a-input-password
+                  class="w-full"
+                  type="password"
+                  placeholder="Konfirmasi Password Baru"
+                  v-model="form.confirmPassword"
+                  size="large"
+                >
+                </a-input-password>
+              </a-form-model-item>
+            </a-col>
+          </a-row>
+          <a-alert
+            class="mt-4"
+            message="Error"
+            v-if="showErrorMessage"
+            :description="errorMessage"
+            type="error"
+            show-icon
+          />
+          <a-button
+            :disabled="isLoading"
+            class="mt-[5vh]"
+            size="large"
+            type="primary"
+            :loading="isLoading"
+            block
+            @click="onSubmit"
+          >
+            Konfirmasi
+          </a-button>
+        </div>
+      </a-col>
+    </a-row>
+  </a-form-model>
 </template>
 <script lang="ts">
 import Vue from "vue";
@@ -74,9 +84,38 @@ export default class AuthLogin extends Vue {
   authApi = new AuthApi();
   profileApi = new ProfileApi();
 
+  formResetPasswordRules = {
+    password: [
+      {
+        required: true,
+        message: "Wajib di isi.",
+        trigger: "change",
+      },
+    ],
+    confirmPassword: [
+      {
+        required: true,
+        message: "Wajib di isi.",
+        trigger: "change",
+      },
+      {
+        validator: (rule: any, value: any, callback: any) => {
+          if (value === this.form.password) {
+            callback();
+          }
+          callback("Password Tidak Sama");
+        },
+        trigger: "change",
+      },
+    ],
+  };
+
   async onSubmit() {
-    if (!this.form.password) return;
-    if (this.form.password !== this.form.confirmPassword) return;
+    const formRef: any = this.$refs.formResetPassword;
+    const isValid = await formRef.validate((valid: boolean) => {
+      return valid;
+    });
+    if (!isValid) return;
     this.showErrorMessage = false;
     this.isLoading = true;
     try {
