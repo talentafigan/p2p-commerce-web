@@ -25,7 +25,7 @@ export class AuthApi {
   resetPasswordRequest(email: string) {
     return Axios.post("/api/reset-password/request", {
       email,
-      userTypeId: "3",
+      userType: "3",
     });
   }
   resetPasswordCheckCode(code: string) {
@@ -34,6 +34,6 @@ export class AuthApi {
     });
   }
   resetPasswordNewPassword(data: { newPassword: string; code: string }) {
-    return Axios.post("/api/reset-password/check-code-active", data);
+    return Axios.post("/api/reset-password/new-password", data);
   }
 }
