@@ -114,8 +114,9 @@ export default class AuthLogin extends Vue {
 
   async onClickLogin() {
     const formRef: any = this.$refs.formLogin;
-    const isValid = await formRef.validate((valid: boolean) => {
-      return valid;
+    let isValid = false;
+    formRef.validate((valid: boolean) => {
+      isValid = valid;
     });
     if (!isValid) return;
     this.showErrorMessage = false;

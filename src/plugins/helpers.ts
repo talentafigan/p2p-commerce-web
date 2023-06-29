@@ -32,6 +32,14 @@ export default class Helpers {
       }, duration);
     });
   }
+  intialString(val: any) {
+    let rgx = new RegExp(/(\p{L}{1})\p{L}+/, "gu");
+    let initials = [...val.matchAll(rgx)] || [];
+    initials = (
+      (initials.shift()?.[1] || "") + (initials.pop()?.[1] || "")
+    ).toUpperCase();
+    return initials;
+  }
   datePassed(date: string, pass: number, type: any) {
     var dateNow = moment(new Date());
     if (moment(date).diff(dateNow, type) > pass) return true;
