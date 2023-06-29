@@ -90,8 +90,9 @@ export default class AuthLogin extends Vue {
   profileApi = new ProfileApi();
   async onSubmit() {
     const formRef: any = this.$refs.formForgotPassword;
-    const isValid = await formRef.validate((valid: boolean) => {
-      return valid;
+    let isValid = false;
+    formRef.validate((valid: boolean) => {
+      isValid = valid;
     });
     if (!isValid) return;
     this.showErrorMessage = false;

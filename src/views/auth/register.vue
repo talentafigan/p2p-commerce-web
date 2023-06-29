@@ -209,8 +209,9 @@ export default class authRegister extends Vue {
 
   async onClickRegister() {
     const formRef: any = this.$refs.formRegister;
-    const isValid = await formRef.validate((valid: boolean) => {
-      return valid;
+    let isValid = false;
+    formRef.validate((valid: boolean) => {
+      isValid = valid;
     });
     if (!isValid) return;
     this.showErrorMessage = false;

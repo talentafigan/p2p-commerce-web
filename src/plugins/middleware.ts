@@ -1,26 +1,33 @@
-import Helpers from "./helpers";
-
-const publicRouter = [
+const authRouter = [
   "authLogin",
   "authRegister",
   "authForgotPassword",
   "authResetPassword",
-  "home",
 ];
 
-const helpers = new Helpers();
+const publicRouter = ["home"];
 
 export const authMiddleware = (ctx: any) => {
   const vuex = sessionStorage.getItem("vuex");
   if (!vuex) {
-    if (publicRouter.includes(ctx.to.name)) return ctx.next();
+    if (
+      authRouter.includes(ctx.to.name) ||
+      publicRouter.includes(ctx.to.name)
+    ) {
+      return ctx.next();
+    }
     return ctx.next("/auth/login");
   }
   const auth = JSON.parse(vuex);
   if (auth.auth.token === null) {
-    if (publicRouter.includes(ctx.to.name)) return ctx.next();
+    if (
+      authRouter.includes(ctx.to.name) ||
+      publicRouter.includes(ctx.to.name)
+    ) {
+      return ctx.next();
+    }
     return ctx.next("/auth/login");
   }
-  if (!publicRouter.includes(ctx.to.name)) return ctx.next("/");
+  if (authRouter.includes(ctx.to.name)) return ctx.next("/");
   return ctx.next();
 };

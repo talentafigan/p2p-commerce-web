@@ -40,7 +40,10 @@
           </a-dropdown>
         </div>
       </div>
-      <div class="flex justify-end items-center flex-row">
+      <div
+        v-if="authState.token === null"
+        class="flex justify-end items-center flex-row"
+      >
         <a-button type="primary" @click="$router.push('/auth/login')" ghost>
           Masuk
         </a-button>
@@ -51,6 +54,45 @@
         >
           Daftar
         </a-button>
+      </div>
+      <div
+        v-if="authState.token !== null"
+        class="flex justify-end items-center flex-row"
+      >
+        <span class="font-semibold text-base mr-2">{{
+          authState.user.fullname
+        }}</span>
+        <a-dropdown :trigger="['click']">
+          <a-avatar
+            class="cursor-pointer"
+            size="large"
+            style="background-color: #e31e52"
+          >
+            <span class="text-base font-semibold">{{
+              $helpers.intialString(authState.user.fullname)
+            }}</span>
+          </a-avatar>
+          <a-menu class="w-[100px]" slot="overlay">
+            <a-menu-item key="0">
+              <div class="w-full flex flex-row justify-between items-center">
+                <span>Profile</span>
+                <li class="text-base ri-user-line"></li>
+              </div>
+            </a-menu-item>
+            <a-menu-item key="0">
+              <div class="w-full flex flex-row justify-between items-center">
+                <span>Dompet</span>
+                <li class="text-base ri-wallet-3-line"></li>
+              </div>
+            </a-menu-item>
+            <a-menu-item @click="onClickLogout" key="1">
+              <div class="w-full flex flex-row justify-between items-center">
+                <span>Keluar</span>
+                <li class="text-base ri-logout-circle-r-line"></li>
+              </div>
+            </a-menu-item>
+          </a-menu>
+        </a-dropdown>
       </div>
     </div>
   </div>
@@ -67,11 +109,19 @@ export default class LayoutMainAppbar extends Vue {
   routeTopageLoginSeller() {
     window.open(process.env.VUE_APP_WEB_SELLER_URL);
   }
-  routeTopageLogin() {
-    this.$router.push("/auth/login");
+
+  async onClickLogout() {
+    try {
+      await this.authApi.logout();
+    } catch (error) {
+    } finally {
+      this.$store.commit("auth/resetAuth");
+      window.location.reload()
+    }
   }
-  routeTopageRegister() {
-    this.$router.push("/auth/register");
-  }
+
+  authState = this.$store.state.auth;
+
+  $helpers: any;
 }
 </script>
