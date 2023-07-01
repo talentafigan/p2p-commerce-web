@@ -5,37 +5,37 @@
       <div class="grid grid-cols-3 w-full items-center mt-3">
         <span class="col-span-1 text-base">Password Lama</span>
         <a-form-model-item class="col-span-2" prop="oldPassword">
-          <a-input
+          <a-input-password
             type="password"
             class="w-full"
             v-model="form.oldPassword"
             size="large"
           >
-          </a-input>
+          </a-input-password>
         </a-form-model-item>
       </div>
       <div class="grid grid-cols-3 w-full items-center mt-3">
         <span class="col-span-1 text-base">Password Baru</span>
         <a-form-model-item class="col-span-2" prop="newPassword">
-          <a-input
+          <a-input-password
             type="password"
             class="w-full"
             v-model="form.newPassword"
             size="large"
           >
-          </a-input>
+          </a-input-password>
         </a-form-model-item>
       </div>
       <div class="grid grid-cols-3 w-full items-center mt-3">
         <span class="col-span-1 text-base">Konfirmasi Password</span>
         <a-form-model-item class="col-span-2" prop="confirmPassword">
-          <a-input
+          <a-input-password
             type="password"
             class="w-full"
             v-model="form.confirmPassword"
             size="large"
           >
-          </a-input>
+          </a-input-password>
         </a-form-model-item>
       </div>
       <a-alert
