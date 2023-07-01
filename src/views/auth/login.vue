@@ -136,7 +136,7 @@ export default class AuthLogin extends Vue {
         token: response.data.data.accessToken,
         user: userProfile.data.data.user,
       });
-      this.$router.push("/");
+      window.location.reload();
     } catch (error: any) {
       this.showErrorMessage = true;
       this.errorMessage = error.response

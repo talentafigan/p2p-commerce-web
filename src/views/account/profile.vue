@@ -6,7 +6,7 @@
           <a-tab-pane key="1" class="px-2" tab="Data Diri">
             <page-account-form-profile />
           </a-tab-pane>
-          <a-tab-pane key="2" class="px-2" tab="Keamanan">
+          <a-tab-pane key="2" class="px-2" tab="Kata Sandi">
             <page-account-form-password />
           </a-tab-pane>
         </a-tabs>
