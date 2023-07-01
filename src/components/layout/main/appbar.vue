@@ -15,7 +15,7 @@
     <div class="grid w-full px-8 grid-cols-3 w-full h-[72px]">
       <div class="grid grid-cols-8 col-span-2">
         <div class="col-span-2 flex justify-center items-center">
-          <span class="font-semibold text-[18px] text-[#141414]"
+          <span @click="$router.push('/')" class="cursor-pointer font-semibold text-[18px] text-[#141414]"
             >P2P Commerce</span
           >
         </div>
@@ -73,19 +73,19 @@
             }}</span>
           </a-avatar>
           <a-menu class="w-[100px]" slot="overlay">
-            <a-menu-item key="0">
+            <a-menu-item @click="$router.push('/account/profile')" key="0">
               <div class="w-full flex flex-row justify-between items-center">
                 <span>Profile</span>
                 <li class="text-base ri-user-line"></li>
               </div>
             </a-menu-item>
-            <a-menu-item key="0">
+            <a-menu-item @click="$router.push('/account/wallet')" key="1">
               <div class="w-full flex flex-row justify-between items-center">
                 <span>Dompet</span>
                 <li class="text-base ri-wallet-3-line"></li>
               </div>
             </a-menu-item>
-            <a-menu-item @click="onClickLogout" key="1">
+            <a-menu-item @click="onClickLogout" key="2">
               <div class="w-full flex flex-row justify-between items-center">
                 <span>Keluar</span>
                 <li class="text-base ri-logout-circle-r-line"></li>
@@ -116,7 +116,7 @@ export default class LayoutMainAppbar extends Vue {
     } catch (error) {
     } finally {
       this.$store.commit("auth/resetAuth");
-      window.location.reload()
+      window.location.reload();
     }
   }
 

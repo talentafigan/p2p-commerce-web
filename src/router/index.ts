@@ -30,6 +30,16 @@ const routes: Array<RouteConfig> = [
     name: "authResetPassword",
     component: Module.authResetPassword,
   },
+  {
+    path: "/account/profile",
+    name: "accountProfile",
+    component: Module.accountProfile,
+  },
+  {
+    path: "/account/wallet",
+    name: "accountWallet",
+    component: Module.accountWallet,
+  },
 ];
 
 const router = new VueRouter({
