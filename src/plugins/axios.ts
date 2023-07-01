@@ -4,6 +4,7 @@ const IStore = store as any;
 
 const register = () => {
   setDefaultBaseUrl();
+  setToken();
 };
 
 const setDefaultBaseUrl = () => {
@@ -11,7 +12,7 @@ const setDefaultBaseUrl = () => {
 };
 
 export const setToken = (token: string = IStore.state.auth.token) => {
-  Axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+  Axios.defaults.headers.common["x-token-id"] = token;
 };
 
 export default register;
