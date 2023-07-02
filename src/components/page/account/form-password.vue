@@ -1,19 +1,7 @@
 <template>
-  <a-form-model :model="form" :rules="formPasswordRules" ref="formProfile">
+  <a-form-model :model="form" :rules="formPasswordRules" ref="formPassword">
     <div class="flex px-5 w-full items-start flex-col">
       <span class="font-semibold text-base">Ubah Password</span>
-      <div class="grid grid-cols-3 w-full items-center mt-3">
-        <span class="col-span-1 text-base">Password Lama</span>
-        <a-form-model-item class="col-span-2" prop="oldPassword">
-          <a-input-password
-            type="password"
-            class="w-full"
-            v-model="form.oldPassword"
-            size="large"
-          >
-          </a-input-password>
-        </a-form-model-item>
-      </div>
       <div class="grid grid-cols-3 w-full items-center mt-3">
         <span class="col-span-1 text-base">Password Baru</span>
         <a-form-model-item class="col-span-2" prop="newPassword">
@@ -62,6 +50,7 @@
 </template>
 
 <script lang="ts">
+import { ProfileApi } from "@/api/profile.api";
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
@@ -69,8 +58,9 @@ import { Component } from "vue-property-decorator";
 export default class PageAccountFormPassword extends Vue {
   isLoading = false;
 
+  profileApi = new ProfileApi();
+
   form = {
-    oldPassword: "",
     newPassword: "",
     confirmPassword: "",
   };
@@ -79,13 +69,6 @@ export default class PageAccountFormPassword extends Vue {
   errorMessage = "";
 
   formPasswordRules = {
-    oldPassword: [
-      {
-        required: true,
-        message: "Wajib di isi.",
-        trigger: "change",
-      },
-    ],
     newPassword: [
       {
         required: true,
@@ -112,8 +95,32 @@ export default class PageAccountFormPassword extends Vue {
   };
 
   async onSave() {
+    const formRef: any = this.$refs.formPassword;
+    let isValid = false;
+    formRef.validate((valid: boolean) => {
+      isValid = valid;
+    });
+    if (!isValid) return;
+    this.showErrorMessage = false;
+    this.isLoading = true;
     try {
-    } catch (error) {}
+      const response = await this.profileApi.changePassword({
+        ...this.form,
+      });
+      if (response.data.status !== "SUCCESS") {
+        this.showErrorMessage = true;
+        this.errorMessage = response.data.message;
+        return;
+      }
+      this.$message.success("Berhasil Ubah Password!");
+    } catch (error: any) {
+      this.showErrorMessage = true;
+      this.errorMessage = error.response
+        ? error.response.message
+        : "System Error, please contact our team";
+    } finally {
+      this.isLoading = false;
+    }
   }
 }
 </script>
