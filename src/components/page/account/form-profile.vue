@@ -1,6 +1,6 @@
 <template>
   <a-form-model :model="form" :rules="fomrProfileRules" ref="formProfile">
-    <div class="flex border p-5 w-full items-start flex-col">
+    <div class="flex px-5 w-full items-start flex-col">
       <span class="font-semibold text-base">Bio data</span>
       <div class="grid grid-cols-3 w-full items-center mt-5">
         <span class="col-span-1 text-base">Nama Lengkap</span>

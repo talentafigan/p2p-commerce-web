@@ -8,7 +8,7 @@ const authRouter = [
 const publicRouter = ["home"];
 
 export const authMiddleware = (ctx: any) => {
-  const vuex = sessionStorage.getItem("vuex");
+  const vuex = localStorage.getItem("vuex");
   if (!vuex) {
     if (
       authRouter.includes(ctx.to.name) ||
