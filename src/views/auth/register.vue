@@ -228,10 +228,6 @@ export default class authRegister extends Vue {
       }
       this.$message.success("Berhasil Daftar !");
       await this.$helpers.shortSetTimeOut(1000);
-      this.$store.commit("auth/setAuth", {
-        token: response.data.data.accessToken,
-        user: response.data.data.user,
-      });
       this.$router.push("/auth/login");
     } catch (error: any) {
       this.showErrorMessage = true;
