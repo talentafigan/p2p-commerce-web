@@ -4,12 +4,13 @@
     :visible-slides="1"
     :bullets="false"
     :gap="1"
+    fixed-height="35vh"
+    :touchable="false"
     :arrows-outside="false"
-    :slide-ratio="1 / 4"
   >
-    <vueper-slide v-for="i in 9" :key="i">
+    <vueper-slide v-for="(item, index) in banners" :key="index">
       <template #content>
-        <div class="rounded-lg bg-primary h-full"></div>
+        <img class="rounded-lg" :src="item.image" style="width: 100%; height: 35vh; object-fit: cover" alt="" />
       </template>
     </vueper-slide>
     <template #arrow-left>
@@ -31,5 +32,16 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
 @Component
-export default class PageHomeBanner extends Vue {}
+export default class PageHomeBanner extends Vue {
+  banners = [
+    {
+      image:
+        "https://digitumo.com/wp-content/uploads/2022/08/Konsep-Digital-Marketing.jpg",
+    },
+    {
+      image:
+        "https://digitumo.com/wp-content/uploads/2022/08/Apa-Itu-Content-Marketing.jpg",
+    },
+  ];
+}
 </script>

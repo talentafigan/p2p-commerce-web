@@ -12,7 +12,7 @@
             <div class="flex flex-col w-full p-2">
               <img
                 style="width: 100%; height: 120px; object-fit: cover"
-                src="https://digitumo.com/wp-content/uploads/2022/08/Konsep-Digital-Marketing.jpg"
+                src="https://static.vecteezy.com/system/resources/thumbnails/004/579/363/small_2x/digital-marketing-and-seo-optimization-strategy-free-vector.jpg"
                 alt=""
               />
               <span class="text-sm mt-4 text-black font-semibold"
