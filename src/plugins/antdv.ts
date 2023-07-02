@@ -10,7 +10,8 @@ import {
   Form,
   FormModel,
   Tabs,
-  DatePicker
+  DatePicker,
+  Rate
 } from "ant-design-vue";
 
 export default function setup() {
@@ -25,4 +26,5 @@ export default function setup() {
   Vue.use(FormModel);
   Vue.use(Tabs);
   Vue.use(DatePicker);
+  Vue.use(Rate)
 }
