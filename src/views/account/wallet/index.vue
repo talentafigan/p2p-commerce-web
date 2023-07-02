@@ -1,7 +1,7 @@
 <template>
   <layout-main>
     <div class="bg-primary h-[30vh]"></div>
-    <div class="w-full absolute top-[38vh] grid grid-cols-12 gap-10 items-start">
+    <div class="w-full absolute top-[38vh] grid grid-cols-12 gap-5 items-start">
       <div class="md:col-start-3 bg-white border p-3 rounded flex flex-col md:col-span-3 col-span-12">
         <span class="text-lg font-semibold">Dompet Saya</span>
         <div class="w-full flex justify-between items-center flex-row">
