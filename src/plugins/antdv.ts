@@ -10,6 +10,7 @@ import {
   Form,
   FormModel,
   Tabs,
+  DatePicker
 } from "ant-design-vue";
 
 export default function setup() {
@@ -22,5 +23,6 @@ export default function setup() {
   Vue.use(Col);
   Vue.use(Form);
   Vue.use(FormModel);
-  Vue.use(Tabs)
+  Vue.use(Tabs);
+  Vue.use(DatePicker);
 }
