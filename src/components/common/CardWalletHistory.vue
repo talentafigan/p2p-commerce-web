@@ -14,7 +14,7 @@
       <span class="text-md mt-1">{{ date }}</span>
     </div>
     <div class="flex col-span-3 items-end flex-col">
-      <span :class="['text-sm font-semibold', cashPositionColor]"
+      <span :class="['text-base font-semibold', cashPositionColor]"
         >{{ cashPositionSymbol }}{{ amount }} Koin</span
       >
     </div>
@@ -40,7 +40,7 @@
           </div>
           <div class="flex justify-between items-center mt-2 text-base">
             <span>Harga</span>
-            <span class="text-black">2 Koin</span>
+            <span class="text-black">{{ amount }} Koin</span>
           </div>
         </div>
         <div class="flex flex-col w-full" v-if="type === '2'">
