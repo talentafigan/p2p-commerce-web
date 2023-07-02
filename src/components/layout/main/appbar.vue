@@ -16,7 +16,7 @@
       <div class="grid grid-cols-8 col-span-2">
         <div class="col-span-2 flex justify-center items-center">
           <span @click="$router.push('/')" class="cursor-pointer font-semibold text-[18px] text-[#141414]"
-            >P2P Commerce</span
+            >Peluang</span
           >
         </div>
         <div class="col-span-5 flex justify-center items-center">
