@@ -11,7 +11,7 @@
       </div>
       <div class="grid grid-cols-3 w-full items-center mt-3">
         <span class="col-span-1 text-base">Username</span>
-        <a-form-model-item class="col-span-2" prop="fullname">
+        <a-form-model-item class="col-span-2" prop="username">
           <a-input class="w-full" v-model="form.username" size="large">
           </a-input>
         </a-form-model-item>
@@ -63,6 +63,8 @@ import { ProfileApi } from "@/api/profile.api";
 @Component
 export default class PageAccountFormProfile extends Vue {
   profileApi = new ProfileApi();
+
+  $refs: any;
 
   isLoading = false;
 
@@ -150,8 +152,33 @@ export default class PageAccountFormProfile extends Vue {
   };
 
   async onSave() {
+    const formRef: any = this.$refs.formProfile;
+    let isValid = false;
+    formRef.validate((valid: boolean) => {
+      isValid = valid;
+    });
+    if (!isValid) return;
+    this.showErrorMessage = false;
+    this.isLoading = true;
     try {
-    } catch (error) {}
+      const response = await this.profileApi.update({
+        ...this.form,
+        phone: "62" + this.form.phone,
+      });
+      if (response.data.status !== "SUCCESS") {
+        this.showErrorMessage = true;
+        this.errorMessage = response.data.message;
+        return;
+      }
+      this.$message.success("Berhasil Update Profile!");
+    } catch (error: any) {
+      this.showErrorMessage = true;
+      this.errorMessage = error.response
+        ? error.response.message
+        : "System Error, please contact our team";
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   mounted() {

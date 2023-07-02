@@ -10,4 +10,7 @@ export class ProfileApi {
         : {},
     });
   }
+  update(data: any) {
+    return Axios.put("/api/profile", data);
+  }
 }
