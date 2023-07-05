@@ -1,8 +1,11 @@
 import moment from "moment";
-moment.locale();
+moment.locale('ID');
 export default class Helpers {
   dateShortFormat(date: string) {
-    moment(date).format("DD-MM-YYYY");
+    return moment(date).format("DD-MM-YYYY");
+  }
+  fullDate(date: string) {
+    return moment(date).format("dddd, D MMMM YYYY, HH:mm");
   }
   generateUUID = () => {
     var d = new Date().getTime(); //Timestamp

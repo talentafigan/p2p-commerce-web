@@ -18,7 +18,7 @@
           >
         </div>
       </div>
-      <div class="flex flex-col col-span-5">
+      <div class="flex flex-col md:col-span-5 col-span-12">
         <a-modal maskClosable v-model="showModalTopUp" title="Top-up">
           <div class="w-full flex justify-center items-start flex-col">
             <span class="text-black text-base">Masukan Jumlah Koin</span>
@@ -92,6 +92,16 @@
             <common-card-wallet-history
               v-for="(item, index) in walletHistory"
               :key="index"
+              :type="item.type"
+              :amount="item.amount"
+              :date="item.createDate"
+              :fee="item.fee"
+              :transactionId="item.transactionId"
+              :transactionType="item.transactionType?.transactionTypeId"
+              :transactionTypeTitle="item.transactionType?.name"
+              :status="item.status?.statusId"
+              :totalPayment="item.totalPayment"
+              :invoiceUrl="null"
             />
           </div>
         </div>
@@ -111,7 +121,7 @@ export default class AccountWallet extends Vue {
   walletApi = new WalletApi();
   parameterApi = new ParameterApi();
   walletBalance = 0;
-  walletHistory = [];
+  walletHistory = [] as any[];
   historyDate = null as any;
 
   parameter = {
@@ -148,12 +158,12 @@ export default class AccountWallet extends Vue {
   async fetchHistoryWallet(value: any, dateString: any) {
     this.isLoadingFetchHistory = true;
     try {
-      const resp = await this.walletApi.getHistory(dateString);
+      const resp = await this.walletApi.getHistory(dateString ? dateString : this.$helpers.dateShortFormat(new Date().toISOString()));
       if (resp.data.status !== "SUCCESS") {
         this.$message.error(resp.data.message);
         return;
       }
-      // this.walletHistory = resp.data.data;
+      this.walletHistory = resp.data.data.content;
     } catch (error: any) {
       const errorMessage = error.response
         ? error.response.message
@@ -197,6 +207,7 @@ export default class AccountWallet extends Vue {
   }
 
   mounted() {
+    this.fetchHistoryWallet(null,null);
     this.fetchBalance();
     this.fetchCoinPrice();
     this.fetchAdminFees();
@@ -214,6 +225,7 @@ export default class AccountWallet extends Vue {
       window.open(resp.data.data.invoice?.invoiceUrl, "_blank");
       this.showModalTopUp = false;
       this.formTopUp.amount = 0;
+      this.fetchHistoryWallet(null, null);
     } catch (error: any) {
       const errorMessage = error.response
         ? error.response.message
