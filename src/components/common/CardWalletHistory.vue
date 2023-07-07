@@ -9,7 +9,7 @@
         <span class="text-base font-semibold">{{ transactionTypeTitle }}</span>
         <div
           class="bg-yellow-400 px-2 rounded py-[5px] flex justify-center items-center ml-1"
-          v-if="status === '2'"
+          v-if="status === 2"
         >
           <span class="text-white text-sm leading-none">pending</span>
         </div>
