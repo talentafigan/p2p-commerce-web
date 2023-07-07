@@ -163,7 +163,7 @@ export default class AccountWallet extends Vue {
         this.$message.error(resp.data.message);
         return;
       }
-      this.walletHistory = resp.data.data.content;
+      this.walletHistory = resp.data.data;
     } catch (error: any) {
       const errorMessage = error.response
         ? error.response.message
