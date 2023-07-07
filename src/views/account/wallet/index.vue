@@ -70,7 +70,7 @@
           <span class="text-lg font-bold">Transaksi</span>
           <a-date-picker
             v-model="historyDate"
-            format="DD-MM-YYYY"
+            format="YYYY-MM-DD"
             locale="id"
             @change="fetchHistoryWallet"
             class="mt-[0.8rem] mb-[0.8rem]"
@@ -101,7 +101,7 @@
               :transactionTypeTitle="item.transactionType?.name"
               :status="item.status?.statusId"
               :totalPayment="item.totalPayment"
-              :invoiceUrl="null"
+              :invoiceUrl="item.invoice ? item.invoice.invoiceUrl : null"
             />
           </div>
         </div>
@@ -158,7 +158,11 @@ export default class AccountWallet extends Vue {
   async fetchHistoryWallet(value: any, dateString: any) {
     this.isLoadingFetchHistory = true;
     try {
-      const resp = await this.walletApi.getHistory(dateString ? dateString : this.$helpers.dateShortFormat(new Date().toISOString()));
+      const resp = await this.walletApi.getHistory(
+        dateString
+          ? dateString
+          : this.$helpers.dateShortFormat(new Date().toISOString())
+      );
       if (resp.data.status !== "SUCCESS") {
         this.$message.error(resp.data.message);
         return;
@@ -207,12 +211,15 @@ export default class AccountWallet extends Vue {
   }
 
   mounted() {
-    this.fetchHistoryWallet(null,null);
+    this.fetchHistoryWallet(null, null);
     this.fetchBalance();
     this.fetchCoinPrice();
     this.fetchAdminFees();
   }
   async onSubmitTop() {
+    if (!this.formTopUp.amount) {
+      return;
+    }
     this.isLoadingTopUp = true;
     try {
       const resp = await this.walletApi.topUp(this.formTopUp);
@@ -225,6 +232,7 @@ export default class AccountWallet extends Vue {
       window.open(resp.data.data.invoice?.invoiceUrl, "_blank");
       this.showModalTopUp = false;
       this.formTopUp.amount = 0;
+      this.historyDate = null;
       this.fetchHistoryWallet(null, null);
     } catch (error: any) {
       const errorMessage = error.response
