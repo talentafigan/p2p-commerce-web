@@ -55,21 +55,24 @@
             >
               <div
                 :class="[
-                  'p-3 rounded max-w-[50%] flex w-max',
+                  'p-3 flex flex-col rounded max-w-[50%] flex w-max',
                   item.creators?.clientId === consultation.client.userId
-                    ? 'bg-primary text-end'
-                    : 'bg-white border text-start',
+                    ? 'bg-primary items-end text-end'
+                    : 'bg-white border items-start text-start',
                 ]"
               >
                 <span
                   :class="[
-                    'text-sm',
+                    'text-base',
                     item.creators?.clientId === consultation.client.userId
                       ? 'text-white'
                       : 'text-black',
                   ]"
                   >{{ item.content }}</span
                 >
+                <span class="text-xs mt-1">{{
+                  $helpers.fullDate(item.createDate)
+                }}</span>
               </div>
             </div>
           </div>
@@ -107,6 +110,8 @@ import { ChatApi } from "@/api/chat.api";
 @Component
 export default class Consultation extends Vue {
   timerRefecthChat = 0;
+
+  $helpers: any;
 
   @Watch("timerRefecthChat", {
     immediate: true,
