@@ -12,9 +12,10 @@
         </div>
         <div
           v-if="consultation === null && !isLoading"
-          class="w-[50%] bg-white text-center h-[83vh] flex justify-center items-center flex-col"
+          class="w-[60%] bg-white text-center h-[83vh] flex justify-center items-center flex-col"
         >
-          <span class="text-lg text-black font-semibold"
+          <img src="@/assets/speak.png" class="w-[90px]" alt="">
+          <span class="text-xl text-black mt-4 font-semibold"
             >Konsultasikan kebutuhan kamu untuk mendapatkan rekomendasi
             terbaik</span
           >
