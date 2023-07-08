@@ -65,6 +65,25 @@
             </div>
           </div>
         </div>
+        <div class="flex flex-col w-full" v-if="transactionType === 2">
+          <div class="flex justify-between items-center mt-2 text-base">
+            <span>ID Transaksi</span>
+            <span class="text-black">{{ transactionId }}</span>
+          </div>
+          <div class="flex justify-between items-center mt-2 text-base">
+            <span>Status</span>
+            <div
+              :class="[
+                'flex px-2 rounded-full justify-center items-center',
+                chipStatus.get(status)?.bg,
+              ]"
+            >
+              <span :class="['font-semibold', chipStatus.get(status)?.color]">{{
+                chipStatus.get(status)?.title
+              }}</span>
+            </div>
+          </div>
+        </div>
       </div>
       <template #footer>
         <a-button
