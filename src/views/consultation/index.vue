@@ -19,6 +19,7 @@
             >Konsultasikan kebutuhan kamu untuk mendapatkan rekomendasi
             terbaik</span
           >
+          <span class="text-sm mt-4">Admin kami siap membantu kamu</span>
           <a-button
             :loading="isLoadingCreate"
             :disabled="isLoadingCreate"
