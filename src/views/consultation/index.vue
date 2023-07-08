@@ -12,14 +12,17 @@
         </div>
         <div
           v-if="consultation === null && !isLoading"
-          class="w-[60%] bg-white text-center h-[83vh] flex justify-center items-center flex-col"
+          class="w-[50%] bg-white text-center h-[83vh] flex justify-center items-center flex-col"
         >
-          <img src="@/assets/speak.png" class="w-[90px]" alt="">
+          <img src="@/assets/speak.png" class="w-[90px]" alt="" />
           <span class="text-xl text-black mt-4 font-semibold"
-            >Konsultasikan kebutuhan kamu untuk mendapatkan rekomendasi
-            terbaik</span
+            >Konsultasikan kebutuhan kamu dengan admin untuk mendapatkan
+            rekomendasi terbaik</span
           >
-          <span class="text-sm mt-4">Admin kami siap membantu kamu</span>
+          <span class="text-sm mt-4"
+            >Anda memerlukan 1 koin untuk 1x sesi konsultasi selama 24 jam.
+            Pastikan anda saldo koin anda cukup.</span
+          >
           <a-button
             :loading="isLoadingCreate"
             :disabled="isLoadingCreate"
