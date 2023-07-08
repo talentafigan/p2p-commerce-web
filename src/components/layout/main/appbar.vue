@@ -72,7 +72,7 @@
               $helpers.intialString(authState.user.fullname)
             }}</span>
           </a-avatar>
-          <a-menu class="w-[100px]" slot="overlay">
+          <a-menu class="w-[120px]" slot="overlay">
             <a-menu-item @click="$router.push('/account/profile')" key="0">
               <div class="w-full flex flex-row justify-between items-center">
                 <span>Profile</span>
@@ -83,6 +83,12 @@
               <div class="w-full flex flex-row justify-between items-center">
                 <span>Dompet</span>
                 <li class="text-base ri-wallet-3-line"></li>
+              </div>
+            </a-menu-item>
+            <a-menu-item @click="$router.push('/account/wallet')" key="1">
+              <div class="w-full flex flex-row justify-between items-center">
+                <span>Konsultasi</span>
+                <li class="text-base ri-customer-service-2-line"></li>
               </div>
             </a-menu-item>
             <a-menu-item @click="onClickLogout" key="2">

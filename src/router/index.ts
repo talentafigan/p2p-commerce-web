@@ -40,6 +40,11 @@ const routes: Array<RouteConfig> = [
     name: "accountWallet",
     component: Module.accountWallet,
   },
+  {
+    path: "/consultation",
+    name: "consultation",
+    component: Module.consultation,
+  },
 ];
 
 const router = new VueRouter({

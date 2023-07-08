@@ -7,7 +7,16 @@
     </div>
     <div class="grid grid-cols-12 mt-4 w-full">
       <div class="col-span-8 col-start-3">
-        <div class="w-full grid grid-cols-4 gap-4">
+        <div @click="$router.push('/consultation')" class="cursor-pointer bg-blue-500 p-3 w-full flex justify-between px-4 rounded-lg">
+          <span class="text-lg text-white font-medium">Konsultasi untuk tentukan pilihan kamu.</span>
+          <i class="ri-arrow-right-line text-xl text-white font-bold"></i>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-12 mt-4 w-full">
+      <div class="col-span-8 col-start-3">
+        <span class="text-lg font-semibold text-black">Rekomendasi</span>
+        <div class="w-full grid grid-cols-4 mt-3 gap-4">
           <div v-for="i in 9" class="flex flex-col rounded bg-white border">
             <div class="flex flex-col w-full p-2">
               <img

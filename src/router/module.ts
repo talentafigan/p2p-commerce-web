@@ -6,4 +6,5 @@ export default {
   authResetPassword: require("@/views/auth/reset-password.vue").default,
   accountProfile: require("@/views/account/profile.vue").default,
   accountWallet: require("@/views/account/wallet/index.vue").default,
+  consultation: require("@/views/consultation/index.vue").default,
 };
