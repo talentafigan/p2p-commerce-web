@@ -43,7 +43,10 @@
               ></i>
             </div>
           </div>
-          <div class="flex w-full overflow-y-auto px-2 py-2 h-[61vh] flex-col">
+          <div
+            id="container-chat"
+            class="flex w-full overflow-y-auto px-2 py-2 h-[61vh] flex-col"
+          >
             <div
               v-for="item in chats"
               :class="[
@@ -179,6 +182,12 @@ export default class Consultation extends Vue {
           return;
         }
         this.chats = resp.data.data;
+        this.$nextTick(() => {
+          document.getElementById("container-chat")?.scrollTo({
+            behavior: "smooth",
+            top: document.getElementById("container-chat")?.scrollHeight,
+          });
+        });
       } catch (error: any) {
         const errorMessage = error.response
           ? error.response.message
