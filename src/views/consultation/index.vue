@@ -156,7 +156,7 @@ export default class Consultation extends Vue {
   chatApi = new ChatApi();
 
   consultation = null as any;
-  chats = null as any;
+  chats = [] as any;
 
   formChat = {
     content: null,
@@ -191,6 +191,10 @@ export default class Consultation extends Vue {
         );
         if (resp.data.status !== "SUCCESS") {
           this.$message.error(resp.data.message);
+          return;
+        }
+        if (resp.data.data.length === this.chats.length) {
+          this.chats = resp.data.data;
           return;
         }
         this.chats = resp.data.data;
