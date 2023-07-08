@@ -48,7 +48,7 @@
               v-for="item in chats"
               :class="[
                 'flex items-center flex-row my-1',
-                item.creators?.userId === consultation.client.userId
+                item.creators?.userId === $store.state.auth.user.userId
                   ? 'justify-end'
                   : 'justify-start',
               ]"
@@ -56,7 +56,7 @@
               <div
                 :class="[
                   'p-3 flex flex-col rounded max-w-[50%] flex w-max',
-                  item.creators?.clientId === consultation.client.userId
+                  item.creators?.userId === $store.state.auth.user.userId
                     ? 'bg-primary items-end text-end'
                     : 'bg-white border items-start text-start',
                 ]"
@@ -64,15 +64,21 @@
                 <span
                   :class="[
                     'text-base',
-                    item.creators?.clientId === consultation.client.userId
+                    item.creators?.userId === $store.state.auth.user.userId
                       ? 'text-white'
                       : 'text-black',
                   ]"
                   >{{ item.content }}</span
                 >
-                <span class="text-xs mt-1">{{
-                  $helpers.fullDate(item.createDate)
-                }}</span>
+                <span
+                  :class="[
+                    'text-xs mt-1',
+                    item.creators?.userId === $store.state.auth.user.userId
+                      ? 'text-white'
+                      : 'text-black',
+                  ]"
+                  >{{ $helpers.fullDate(item.createDate) }}</span
+                >
               </div>
             </div>
           </div>
