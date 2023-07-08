@@ -29,10 +29,10 @@
         </div>
         <div
           v-if="consultation !== null && !isLoading"
-          class="w-full text-center h-[83vh] flex justify-start items-center flex-col"
+          class="w-full text-center h-[84vh] flex justify-start items-center flex-col"
         >
           <div
-            class="w-full sticky top-0 h-[60px] flex justify-start px-5 border bg-white"
+            class="w-full top-0 h-[60px] flex justify-start px-5 border bg-white"
           >
             <div class="flex justify-center items-center">
               <span class="font-medium text-black text-base">{{
@@ -47,6 +47,16 @@
             id="container-chat"
             class="flex w-full overflow-y-auto px-2 py-2 h-[61vh] flex-col"
           >
+            <a-alert
+              class="mb-2"
+              :description="`Sesi konsultasi akan kadaluarsa pada ${$helpers.passDate(
+                consultation.createDate,
+                1,
+                'days'
+              )}`"
+              banner
+              type="info"
+            />
             <div
               v-for="item in chats"
               :class="[
@@ -85,24 +95,22 @@
               </div>
             </div>
           </div>
-          <div class="grid grid-cols-12 w-full w-full fixed bottom-0">
-            <div
-              class="col-span-6 border flex flex-row items-center justify-center py-3 col-start-4 px-4 bg-white"
+          <div
+            class="w-full bottom-0 col-span-6 border flex flex-row items-center justify-center py-3 col-start-4 px-4 bg-white"
+          >
+            <a-textarea
+              v-model="formChat.content"
+              placeholder="Masukan pesan..."
+              :rows="2"
+            ></a-textarea>
+            <a-button
+              @click="onSendMessage"
+              type="primary"
+              shape="circle"
+              class="ml-2"
             >
-              <a-textarea
-                v-model="formChat.content"
-                placeholder="Masukan pesan..."
-                :rows="2"
-              ></a-textarea>
-              <a-button
-                @click="onSendMessage"
-                type="primary"
-                shape="circle"
-                class="ml-2"
-              >
-                <i class="ri-send-plane-line"></i>
-              </a-button>
-            </div>
+              <i class="ri-send-plane-line"></i>
+            </a-button>
           </div>
         </div>
       </div>

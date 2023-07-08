@@ -1,5 +1,5 @@
 import moment from "moment";
-moment.locale('ID');
+moment.locale("ID");
 export default class Helpers {
   dateShortFormat(date: string) {
     return moment(date).format("YYYY-MM-DD");
@@ -50,6 +50,10 @@ export default class Helpers {
     var dateNow = moment(new Date());
     if (moment(date).diff(dateNow, type) > pass) return true;
     return false;
+  }
+  passDate(date: string, pass: number, unit: any) {
+    if (!date) return "";
+    return moment(date).add(pass, unit).format('dddd, D MMMM YYYY, HH:mm');
   }
   currencyFormat(val: number) {
     if (!val) return 0;
