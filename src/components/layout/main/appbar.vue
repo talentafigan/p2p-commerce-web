@@ -85,7 +85,7 @@
                 <li class="text-base ri-wallet-3-line"></li>
               </div>
             </a-menu-item>
-            <a-menu-item @click="$router.push('/account/wallet')" key="1">
+            <a-menu-item @click="$router.push('/consultation')" key="1">
               <div class="w-full flex flex-row justify-between items-center">
                 <span>Konsultasi</span>
                 <li class="text-base ri-customer-service-2-line"></li>
