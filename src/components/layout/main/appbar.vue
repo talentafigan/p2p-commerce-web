@@ -15,12 +15,17 @@
     <div class="grid w-full px-8 grid-cols-3 w-full h-[72px]">
       <div class="grid grid-cols-8 col-span-2">
         <div class="col-span-2 flex justify-center items-center">
-          <span @click="$router.push('/')" class="cursor-pointer font-semibold text-[18px] text-[#141414]"
+          <span
+            @click="$router.push('/')"
+            class="cursor-pointer font-semibold text-[18px] text-[#141414]"
             >Peluang</span
           >
         </div>
         <div class="col-span-5 flex justify-center items-center">
-          <a-input-search placeholder="Cari kelas" />
+          <a-input-search
+            @change.capture="onSearch"
+            placeholder="Cari kelas"
+          />
         </div>
         <div class="col-span-1 flex justify-center items-center">
           <a-dropdown :trigger="['click']">
@@ -108,10 +113,13 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import { AuthApi } from "@/api/auth.api";
+import { ProductApi } from "@/api/product.api";
 
 @Component
 export default class LayoutMainAppbar extends Vue {
   authApi = new AuthApi();
+  productApi = new ProductApi();
+  searchKey = "";
   routeTopageLoginSeller() {
     window.open(process.env.VUE_APP_WEB_SELLER_URL);
   }
@@ -127,6 +135,11 @@ export default class LayoutMainAppbar extends Vue {
   }
 
   authState = this.$store.state.auth;
+  
+  onSearch(event: any) {
+    if (event.type !== "change") return;
+    window.location.href = "/product/search?q=" + event.target.value
+  }
 
   $helpers: any;
 }

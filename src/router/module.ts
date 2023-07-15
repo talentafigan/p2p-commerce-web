@@ -7,4 +7,6 @@ export default {
   accountProfile: require("@/views/account/profile.vue").default,
   accountWallet: require("@/views/account/wallet/index.vue").default,
   consultation: require("@/views/consultation/index.vue").default,
+  productSearch: require("@/views/product/search.vue").default,
+  productDetail: require("@/views/product/_id.vue").default,
 };
