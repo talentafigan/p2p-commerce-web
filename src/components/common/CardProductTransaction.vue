@@ -40,6 +40,34 @@
             $helpers.fullDate(productDetail.createDate)
           }}</span>
         </div>
+        <div
+          v-if="
+            productDetail.productTransactionStatus
+              .productTransactionStatusId === 6
+          "
+          class="w-full mt-1 flex flex-row justify-between"
+        >
+          <span class="text-sm">Tanggal pembatalan</span>
+          <span class="font-bold text-sm">{{
+            $helpers.fullDate(productDetail.cancelDate)
+          }}</span>
+        </div>
+        <div
+          v-if="
+            productDetail.productTransactionStatus
+              .productTransactionStatusId === 6
+          "
+          class="w-full mt-1 flex flex-row justify-between"
+        >
+          <span class="text-sm">Dibatalkan oleh</span>
+          <span class="font-bold text-sm">
+            {{
+              productDetail.canceledBy.userType.userTypeId === 3
+                ? productDetail.client.fullname
+                : productDetail.product.seller.fullname
+            }}
+          </span>
+        </div>
         <a-divider class="my-3"></a-divider>
         <span class="font-bold text-base">Detail Produk</span>
         <div class="w-full mt-3 flex flex-row justify-between">
