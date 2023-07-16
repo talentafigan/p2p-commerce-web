@@ -88,7 +88,7 @@ export default class ProductTransaction extends Vue {
 
   productTransactionStatusList = [] as any[];
 
-  productTransactionList = ProductTransactionData as any[];
+  productTransactionList = [] as any[];
 
   isLoadingProductTransaction = false;
 
