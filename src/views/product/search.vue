@@ -40,7 +40,7 @@ export default class ProductSearch extends Vue {
 
   query = {
     page: 0,
-    size: 10,
+    size: 15,
   };
 
   async fetchProduct() {
