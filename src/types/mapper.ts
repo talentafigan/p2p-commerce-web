@@ -27,4 +27,18 @@ export const ProductTransactionStatusMapper = new Map([
       color: "text-red-500",
     },
   ],
+  [
+    5,
+    {
+      bg: "bg-green-200",
+      color: "text-green-500",
+    },
+  ],
+  [
+    6,
+    {
+      bg: "bg-red-200",
+      color: "text-red-500",
+    },
+  ],
 ]);

@@ -18,4 +18,7 @@ export class ProductTransactionApi {
   updateProof(id: any, data?: any) {
     return Axios.put("/api/product-transaction/proof/" + id, data);
   }
+  updateRating(id: any, data?: any) {
+    return Axios.put("/api/product-transaction/rating/" + id, data);
+  }
 }

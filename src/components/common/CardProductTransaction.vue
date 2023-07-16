@@ -195,6 +195,50 @@
             >Batalkan transaksi</a-button
           >
         </div>
+        <div
+          v-if="
+            productDetail.productTransactionStatus
+              .productTransactionStatusId === 5
+          "
+          class="w-full flex mt-4 flex-col"
+        >
+          <span class="font-bold text-base">Penilaian</span>
+          <div class="w-full flex justify-center flex-col items-center">
+            <div
+              v-if="productDetail.rating === 0"
+              class="w-full items-center flex flex-col"
+            >
+              <a-rate v-model="formRating.rating" />
+              <a-textarea
+                v-model="formRating.ratingDescription"
+                class="w-full mt-3"
+                placeholder="Catatan (opsional)"
+              ></a-textarea>
+            </div>
+            <div
+              v-if="productDetail.rating !== 0"
+              class="w-full items-center flex flex-col"
+            >
+              <a-rate v-model="productDetail.rating" />
+              <a-textarea
+                v-model="productDetail.ratingDesctiption"
+                class="w-full mt-3"
+                disabled
+                placeholder="Catatan (opsional)"
+              ></a-textarea>
+            </div>
+            <a-button
+              class="mt-4"
+              v-if="productDetail.rating === 0"
+              block
+              type="primary"
+              :disabled="formRating.rating === 0 || isLoadingUpdateRating"
+              :loading="isLoadingUpdateRating"
+              @click="onClickUpdateRating"
+              >Kirim Penilaian</a-button
+            >
+          </div>
+        </div>
       </div>
     </a-modal>
     <div class="flex justify-start items-center flex-row">
@@ -299,6 +343,11 @@ export default class CommonCardProductTransaction extends Vue {
 
   productDetail = null as any;
 
+  formRating = {
+    rating: 0,
+    ratingDescription: null,
+  };
+
   async onClickDetail() {
     try {
       const resp = await this.productTransactionApi.getDetail(
@@ -340,6 +389,31 @@ export default class CommonCardProductTransaction extends Vue {
       this.$message.error(errorMessage);
     } finally {
       this.isLoadingCancel = false;
+    }
+  }
+
+  isLoadingUpdateRating = false;
+
+  async onClickUpdateRating() {
+    this.isLoadingUpdateRating = true;
+    try {
+      const resp = await this.productTransactionApi.updateRating(
+        this.productDetail.productTransactionId,
+        this.formRating
+      );
+      if (resp.data.status !== "SUCCESS") {
+        this.$message.error(resp.data.message);
+        return;
+      }
+      this.$message.success("Berhasil mengirim penilaian");
+      this.onClickDetail();
+    } catch (error: any) {
+      const errorMessage = error.response
+        ? error.response.message
+        : "System Error, please contact our team";
+      this.$message.error(errorMessage);
+    } finally {
+      this.isLoadingUpdateRating = false;
     }
   }
 
