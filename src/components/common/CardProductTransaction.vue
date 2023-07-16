@@ -6,6 +6,7 @@
     <a-modal
       :footer="null"
       maskClosable
+      centered
       v-model="showDialogDetail"
       title="Detail Transaksi"
     >
