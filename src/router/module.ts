@@ -9,4 +9,6 @@ export default {
   consultation: require("@/views/consultation/index.vue").default,
   productSearch: require("@/views/product/search.vue").default,
   productDetail: require("@/views/product/_id.vue").default,
+  transaction: require("@/views/transaction/index.vue").default,
+  transactionDetail: require("@/views/transaction/_id.vue").default,
 };

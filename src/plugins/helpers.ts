@@ -53,7 +53,7 @@ export default class Helpers {
   }
   passDate(date: string, pass: number, unit: any) {
     if (!date) return "";
-    return moment(date).add(pass, unit).format('dddd, D MMMM YYYY, HH:mm');
+    return moment(date).add(pass, unit).format("dddd, D MMMM YYYY, HH:mm");
   }
   currencyFormat(val: number) {
     if (!val) return 0;
@@ -68,5 +68,11 @@ export default class Helpers {
       .replace("JPY", "")
       .trim();
     return formatter;
+  }
+  encryptBase64(val: any) {
+    return window.atob(val);
+  }
+  decryptBase64(val: any) {
+    return window.btoa(val);
   }
 }

@@ -22,10 +22,7 @@
           >
         </div>
         <div class="col-span-5 flex justify-center items-center">
-          <a-input-search
-            @change.capture="onSearch"
-            placeholder="Cari kelas"
-          />
+          <a-input-search @change.capture="onSearch" placeholder="Cari kelas" />
         </div>
         <div class="col-span-1 flex justify-center items-center">
           <a-dropdown :trigger="['click']">
@@ -77,7 +74,7 @@
               $helpers.intialString(authState.user.fullname)
             }}</span>
           </a-avatar>
-          <a-menu class="w-[120px]" slot="overlay">
+          <a-menu class="w-[150px]" slot="overlay">
             <a-menu-item @click="$router.push('/account/profile')" key="0">
               <div class="w-full flex flex-row justify-between items-center">
                 <span>Profile</span>
@@ -94,6 +91,12 @@
               <div class="w-full flex flex-row justify-between items-center">
                 <span>Konsultasi</span>
                 <li class="text-base ri-customer-service-2-line"></li>
+              </div>
+            </a-menu-item>
+            <a-menu-item @click="$router.push('/transaction')" key="2">
+              <div class="w-full flex flex-row justify-between items-center">
+                <span>Daftar transaksi</span>
+                <li class="text-base ri-file-list-line"></li>
               </div>
             </a-menu-item>
             <a-menu-item @click="onClickLogout" key="2">
@@ -135,10 +138,17 @@ export default class LayoutMainAppbar extends Vue {
   }
 
   authState = this.$store.state.auth;
-  
+
   onSearch(event: any) {
     if (event.type !== "change") return;
-    window.location.href = "/product/search?q=" + event.target.value
+    window.location.href =
+      "/product/search?key=" +
+      event.target.value +
+      `${
+        this.$route.query.category
+          ? "&category=" + this.$route.query.category
+          : ""
+      }`;
   }
 
   $helpers: any;

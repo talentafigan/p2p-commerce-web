@@ -33,4 +33,8 @@ export default function setup() {
     "common-card-product",
     require("@/components/common/CardProduct.vue").default
   );
+  vue.component(
+    "common-card-product-transaction",
+    require("@/components/common/CardProductTransaction.vue").default
+  );
 }

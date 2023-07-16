@@ -1,0 +1,82 @@
+[
+  {
+    "amount": 10000,
+    "cancelDate": null,
+    "canceledBy": null,
+    "client": {
+      "balance": 1000,
+      "clientId": 1,
+      "email": "prasetya",
+      "fullname": "prasetya",
+      "phone": "628393030392",
+      "user": {
+        "createDate": "2023-07-16T07:38:26.071Z",
+        "deleteDate": "2023-07-16T07:38:26.071Z",
+        "status": {
+          "statusId": 0,
+          "statusName": "string"
+        },
+        "updateDate": "2023-07-16T07:38:26.071Z",
+        "userId": 0,
+        "userType": {
+          "userTypeId": 0,
+          "userTypeName": "string"
+        }
+      },
+      "userId": 0,
+      "username": "prasetya"
+    },
+    "createDate": "2023-07-16T07:38:26.071Z",
+    "product": {
+      "createDate": "2023-07-16T07:38:26.071Z",
+      "deleteDate": "2023-07-16T07:38:26.071Z",
+      "image": null,
+      "productCategories": {
+        "productCategoryId": 1,
+        "productCategoryName": "Test",
+        "productCategoryParentId": null
+      },
+      "productDescription": "test",
+      "productId": 1,
+      "productName": "string",
+      "productPrice": 1000,
+      "rating": 100,
+      "seller": {
+        "avatar": "test",
+        "email": "test",
+        "fullname": "test",
+        "phone": "test",
+        "sellerId": 0,
+        "user": {
+          "createDate": "2023-07-16T07:38:26.071Z",
+          "deleteDate": "2023-07-16T07:38:26.071Z",
+          "status": {
+            "statusId": 0,
+            "statusName": "string"
+          },
+          "updateDate": "2023-07-16T07:38:26.071Z",
+          "userId": 0,
+          "userType": {
+            "userTypeId": 0,
+            "userTypeName": "string"
+          }
+        },
+        "userId": 0,
+        "username": "string"
+      },
+      "status": {
+        "statusId": 0,
+        "statusName": "string"
+      },
+      "updateDate": "2023-07-16T07:38:26.071Z"
+    },
+    "productTransactionId": 5,
+    "productTransactionStatus": {
+      "productTransactionStatusId": 1,
+      "productTransactionStatusName": "string"
+    },
+    "proof": "string",
+    "rating": 0,
+    "ratingDesctiption": "string"
+  }
+]

@@ -48,7 +48,8 @@ export default class ProductSearch extends Vue {
     try {
       const params = {
         ...this.query,
-        productName: this.$route.query.q,
+        searchKey: this.$route.query.key,
+        productCategoryId: this.$route.query.category
       };
       const resp = await this.productApi.get(params);
       if (resp.data.status !== "SUCCESS") {

@@ -55,6 +55,21 @@ const routes: Array<RouteConfig> = [
     name: "productDetail",
     component: Module.productDetail,
   },
+  {
+    path: "/product/:id",
+    name: "productDetail",
+    component: Module.productDetail,
+  },
+  {
+    path: "/transaction",
+    name: "transaction",
+    component: Module.transaction,
+  },
+  {
+    path: "/transaction/:id",
+    name: "transactionDetail",
+    component: Module.transactionDetail,
+  },
 ];
 
 const router = new VueRouter({
