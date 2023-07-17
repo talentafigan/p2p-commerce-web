@@ -120,9 +120,7 @@ export default class ProductDetail extends Vue {
       }
       this.$message.success("Berhasil memesan.");
       await this.$helpers.shortSetTimeOut(1000);
-      this.$router.push(
-        "/product/transaction/" + resp.data.data.productTransactionId
-      );
+      this.$router.push("/transaction/");
     } catch (error: any) {
       const errorMessage = error.response
         ? error.response.message
