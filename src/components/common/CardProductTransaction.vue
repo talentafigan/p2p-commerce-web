@@ -141,7 +141,7 @@
           <a-alert
             class="mt-4"
             message="Catatan"
-            description="kirim dana ke Rekening BCA 080685696 A.n Mentor A"
+            :description="productDetail.note"
             type="info"
             banner
             show-icon
@@ -387,8 +387,6 @@ export default class CommonCardProductTransaction extends Vue {
         return;
       }
       this.productDetail = resp.data.data;
-      this.productDetail.proof =
-        "https://firebasestorage.googleapis.com/v0/b/p2p-commerce.appspot.com/o/8ec2d988-ba54-4fa0-b917-872526370146?alt=media&token=fd4d87f0-6e4a-4b00-bf26-fb697c18e848";
       this.showDialogDetail = true;
     } catch (error: any) {
       const errorMessage = error.response
