@@ -123,6 +123,7 @@ export default class ProductTransaction extends Vue {
   }
 
   async fetchProductTransaction() {
+    this.productTransactionList = []
     this.isLoadingProductTransaction = true;
     try {
       const resp = await this.productTransactionApi.get(this.query);
