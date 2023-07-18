@@ -88,7 +88,7 @@
           </div>
         </div>
         <div
-          @click="$router.push('/product/' + productDetail.product.productId)"
+          @click="onClickDetailProduct"
           class="w-full mt-3 cursor-pointer grid grid-cols-12 py-4 px-3 gap-4 justify-between border rounded-md"
         >
           <div class="col-span-8 flex flex-row justify-start items-start">
@@ -476,6 +476,10 @@ export default class CommonCardProductTransaction extends Vue {
   }
   onClickProof() {
     window.open(this.productDetail.proof, "_blank");
+  }
+  onClickDetailProduct() {
+    if (this.productDetail.product.status.statusId === 3) return;
+    this.$router.push("/product/" + this.productDetail.product.productId);
   }
 }
 </script>
