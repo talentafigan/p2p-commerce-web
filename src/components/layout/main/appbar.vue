@@ -26,10 +26,7 @@
         </div>
         <div class="col-span-1 flex justify-center items-center">
           <a-dropdown :trigger="['click']">
-            <span
-              class="text-[#141414] font-medium cursor-pointer hover:bg-gray-100 px-3 py-2 rounded"
-              >Kategori</span
-            >
+            <i class="cursor-pointer text-xl ri-apps-2-line"></i>
             <a-menu slot="overlay">
               <a-menu-item key="0">
                 <span>Kategori 1</span>
