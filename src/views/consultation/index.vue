@@ -180,7 +180,7 @@ export default class Consultation extends Vue {
         this.consultation = null;
         return;
       }
-      this.consultation = resp.data.data[resp.data.data.length - 1];
+      this.consultation = resp.data.data;
       this.fetchChatMessage();
     } catch (error) {
     } finally {
